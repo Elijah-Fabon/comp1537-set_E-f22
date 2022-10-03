@@ -7,6 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
+    header {
+      clear: both;
+      text-align: center;
+    }
+
     nav {
       background-color: black;
       color: wheat;
@@ -16,6 +21,7 @@
       text-decoration: none;
       display: inline-block;
       padding: 5px;
+      width: 100px;
       text-align: center;
     }
 
@@ -32,6 +38,50 @@
     #lastlink {
       float: right
     }
+
+    section {
+      width: 70%;
+      float: left;
+    }
+
+    aside {
+      width: 30%;
+      float: right;
+      padding-left: 10px;
+      box-sizing: border-box;
+    }
+
+    .card {
+      background-color: #a2b9bc;
+      padding: 20px;
+      margin-top: 5px;
+    }
+
+    footer {
+      clear: both;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 400px) {
+      section {
+        width: 100%;
+        float: none;
+      }
+
+      aside {
+        width: 100%;
+        float: none;
+        padding-left: 0px;
+      }
+
+      #lastlink {
+        float: none;
+      }
+
+      nav a {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 
@@ -46,6 +96,31 @@
     <a href=""> link 3 </a>
     <a href="" id="lastlink"> link 4 </a>
   </nav>
+  <main>
+    <section>
+      <div class="card">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti, similique. Reiciendis quasi aliquid porro,
+        accusamus temporibus aut, ea doloribus nesciunt, in consequatur nam veritatis explicabo ex quo ullam! Magni,
+        quos.
+      </div>
+
+      <div class="card">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe tempora eum quae corporis molestiae rem ad
+        repudiandae, modi doloremque assumenda pariatur totam vitae possimus temporibus laboriosam, animi blanditiis
+        harum minima?
+      </div>
+    </section>
+    <aside>
+      <div class="card">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat eaque unde delectus provident asperiores,
+        possimus, adipisci soluta earum error suscipit expedita consequuntur et. Ad maxime explicabo eius atque ab
+        ducimus.
+      </div>
+    </aside>
+  </main>
+  <footer>
+    <h1> Footer </h1>
+  </footer>
 </body>
 
 </html>
