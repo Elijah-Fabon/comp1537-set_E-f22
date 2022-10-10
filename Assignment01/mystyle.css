@@ -38,6 +38,7 @@ font-family: serif;
 }
 
 .image {
+  width: min-content;
   border: 1px solid black;
   padding: 4px;
   float: right;
@@ -65,11 +66,20 @@ height: 300px;
 }
 
 #Section02 {
-  padding-bottom: 300px;
+  padding-bottom: 50px;
 }
 
 #family {
   padding-right: 10px;
-  width: 70%;
-  float: left;
+}
+
+@media screen and (max-width: 800px) {
+  .image {
+    float: none;
+    }
+
+   .Paragraph {
+    padding-right: 15px;
+    box-sizing: border-box;
+    }
 }
