@@ -1,0 +1,54 @@
+.Content {
+  font-family: sans-serif;
+}
+
+#leftbar {
+  background-color: whitesmoke;
+  font-size: small;
+  float: left;
+  width: 15%;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-sizing: border-box;
+}
+
+.linkset {
+  padding-top: 10px;
+}
+
+#Article {
+  padding-left: 10px;
+  float: right;
+  width: 85%;
+  box-sizing: border-box;
+}
+
+#Section01 {
+  padding-top: 50px;
+}
+
+.Paragraph {
+  padding-right: 10px;
+  box-sizing: border-box;
+}
+
+#Header {
+font-family: serif;
+}
+
+#image {
+  border: 1px solid black;
+  padding: 4px;
+  float: right;
+  }
+
+#name{
+background-color: darkgoldenrod;
+}
+
+td {
+  text-align: center;
+}
+img {
+height: 300px;
+}
