@@ -18,7 +18,7 @@
 }
 
 #Article {
-  padding-left: 10px;
+  padding-left: 15px;
   float: right;
   width: 85%;
   box-sizing: border-box;
@@ -29,7 +29,7 @@
 }
 
 .Paragraph {
-  padding-right: 10px;
+  padding-right: 275px;
   box-sizing: border-box;
 }
 
@@ -64,7 +64,12 @@ height: 300px;
   text-align: center;
 }
 
+#Section02 {
+  padding-bottom: 300px;
+}
+
 #family {
+  padding-right: 10px;
   width: 70%;
   float: left;
 }
