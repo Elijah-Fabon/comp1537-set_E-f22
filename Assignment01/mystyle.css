@@ -7,6 +7,7 @@
   font-size: small;
   float: left;
   width: 15%;
+  height: 2000px;
   padding-left: 30px;
   padding-right: 30px;
   box-sizing: border-box;
@@ -23,8 +24,8 @@
   box-sizing: border-box;
 }
 
-#Section01 {
-  padding-top: 50px;
+.Section {
+  padding-top: 30px;
 }
 
 .Paragraph {
@@ -36,7 +37,7 @@
 font-family: serif;
 }
 
-#image {
+.image {
   border: 1px solid black;
   padding: 4px;
   float: right;
@@ -51,4 +52,19 @@ td {
 }
 img {
 height: 300px;
+}
+
+#contentlist {
+  background-color: aliceblue;
+  width: 350px;
+  border: 1px solid lightblue;
+}
+
+#listtitle {
+  text-align: center;
+}
+
+#family {
+  width: 70%;
+  float: left;
 }
