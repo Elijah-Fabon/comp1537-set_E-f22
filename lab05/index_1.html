@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    header {
+      clear: both;
+      text-align: center;
+    }
+
+    nav {
+      background-color: black;
+      color: whitesmoke;
+    }
+
+    nav a {
+      text-decoration: none;
+      display: inline-block;
+      padding: 5px;
+      width: 100px;
+      text-align: center;
+    }
+
+    nav a:visited {
+      background-color: black;
+      color: whitesmoke;
+    }
+
+    nav a:hover {
+      background-color: whitesmoke;
+      color: black;
+    }
+
+    #lastlink {
+      float: right
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .img_container {
+      width: 30%;
+      float: left;
+      margin-left: calc(10% / 2);
+    }
+
+    #centered_div {
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    footer {
+      clear: both;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 600px) {
+      section {
+        width: 100%;
+        float: none;
+      }
+
+      #lastlink {
+        float: none;
+      }
+
+      .img_container {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      #centered_div {
+        width: 100%;
+      }
+
+      nav a {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1> Responsive Web Gallery </h1>
+  </header>
+  <nav>
+    <a href=""> link 1 </a>
+    <a href=""> link 2 </a>
+    <a href=""> link 3 </a>
+    <a href="" id="lastlink"> link 4 </a>
+  </nav>
+  <main>
+    <section>
+      <div class="card">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti, similique. Reiciendis quasi aliquid
+          porro,
+          accusamus temporibus aut, ea doloribus nesciunt, in consequatur nam veritatis explicabo ex quo ullam! Magni,
+          quos.</p>
+      </div>
+    </section>
+    <div id="inamge_row">
+      <div id="centered_div">
+        <div class="img_container" style="margin-left: 0px;">
+          <img src="https://picsum.photos/300/200?random=1" alt="">
+        </div>
+        <div class="img_container">
+          <img src="https://picsum.photos/300/200?random=2" alt="">
+        </div>
+        <div class="img_container">
+          <img src="https://picsum.photos/300/200?random=3" alt="">
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <h1> Footer </h1>
+  </footer>
+</body>
+
+</html>
