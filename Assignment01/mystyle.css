@@ -86,7 +86,8 @@ height: 300px;
     }
 
   #Article {
-    float: non;
+    padding: 5px;
+    float: none;
     width: 100%;
   }
 
