@@ -96,7 +96,7 @@ footer {
 
 @media screen and (max-width: 800px) {
   header {
-    height: 80px;
+    height: 85px;
   }
 
   svg {
@@ -105,12 +105,14 @@ footer {
   
   nav {
       margin: auto;
-      width: 100%;
+      width: 50%;
       float: none;
     }
   
   nav
   a {
+    margin: auto;
+    width: 50%;
     text-align: center;
   }
 
