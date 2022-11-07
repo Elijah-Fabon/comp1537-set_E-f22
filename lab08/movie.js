@@ -21,7 +21,8 @@ setup = function()
             <p>
             ${data.results[i].overview}
             </p>
-            <img src="https://image.tmdb.org/t/p/w300/${data.results[i].poster_path}">
+            <img src="https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}"
+            style="width: 100%;">
             <button movieID="${data.results[i].backdrop_path}" class="backdropBtn"> BackDrop Image </button>
             <hr>
             </div>
@@ -35,7 +36,7 @@ setup = function()
     // console.log(`https://image.tmdb.org/t/p/w300/${$(this).attr('movieID')}`)
     $("aside").html(
       `
-      <img src="https://image.tmdb.org/t/p/w300/${$(this).attr('movieID')}" id="backdrop">
+      <img src="https://image.tmdb.org/t/p/w300/${$(this).attr('movieID')}">
       `
     )
   })
