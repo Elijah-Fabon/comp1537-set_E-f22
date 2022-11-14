@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="./movie2.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    div {
+
+    }
+    main{
+      float: left;
+      width: 30%;
+    }
+    aside{
+      float: right;
+      width: 70%;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div>
+      Search TMDB by title: 
+    </div>
+    <div id="pagebuttons"></div>
+  </div>
+  <main>
+    <div id="pagination_div">
+      <label for="pagesizemanu">Page Size</label>
+      <select name="pagesizemenu" id="pagesizemenu">
+        <option value="3">3</option>
+        <option value="5">5</option>
+        <option value="7">7</option>
+        <option value="9">9</option>
+      </select>
+      <br>
+      <label for="searchTerm">Search A Movie</label>
+      <input type="text" name="searchTerm">
+      <br>
+      <button id="prevbtn">Prev</button>
+      <p>buttons to be added</p>
+      <button id="nextbtn">Next</button>
+      <button id="searchbtn">Search</button>
+    </div>
+  </main>
+  <aside></aside>
+</body>
+
+</html>
