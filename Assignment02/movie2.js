@@ -1,6 +1,21 @@
 var PAGE_SIZE;
 var CURRENT_PAGE = 1;
 
+hide_buttons = (yes) => {
+  if (yes == true) {
+    $("#firstbtn").hide()
+    $("#prevbtn").hide()
+    $("#nextbtn").hide()
+    $("#lastbtn").hide()
+  }
+  else {
+    $("#firstbtn").show()
+    $("#prevbtn").show()
+    $("#nextbtn").show()
+    $("#lastbtn").show()
+  }
+}
+
 display_page = () => {
   console.log(PAGE_SIZE)
   console.log(CURRENT_PAGE)
@@ -29,10 +44,16 @@ display_page = () => {
               `
             )
           }
+          $("#lastbtn").click(() => {
+            PAGE_SIZE = $("#pagesizemenu option:selected").val();
+            CURRENT_PAGE = Math.ceil(data.results.length / (PAGE_SIZE))
+            $("main").empty()
+            display_page()
+          })
         }
       }
-      )
-    }
+    )
+  }
     
 paginate_buttons = () => {
   $.ajax
@@ -64,10 +85,10 @@ setup = function() {
     $("#pagebuttons").empty()
     display_page()
     paginate_buttons()
+    hide_buttons(false)
   })
 
   $("#pagesizemenu").change(() => {
-    // PAGE_SIZE = $("#pagesizemenu").val();
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     console.log("PAGESIZE", PAGE_SIZE);
     $("main").empty();
@@ -91,9 +112,16 @@ setup = function() {
     display_page()
   })
 
+  $("#firstbtn").click(() => {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    CURRENT_PAGE = 1
+    $("main").empty()
+    display_page()
+  })
+
   $("body").on("click", "#pagebtn", function () {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    CURRENT_PAGE = $("#pagebtn").val();
+    CURRENT_PAGE = $("#pagebtn").html();
     $("main").empty()
     display_page()
   })
@@ -106,6 +134,7 @@ setup = function() {
       `
     )
   })
+  hide_buttons(true)
 }
 
 
