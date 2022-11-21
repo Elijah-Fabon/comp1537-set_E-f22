@@ -1,7 +1,9 @@
 var PAGE_SIZE;
-var CURRENT_PAGE;
+var CURRENT_PAGE = 1;
 
 display_page = () => {
+  console.log(PAGE_SIZE)
+  console.log(CURRENT_PAGE)
    $.ajax
     (
       {
@@ -27,16 +29,30 @@ display_page = () => {
               `
             )
           }
-          for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
-            $("#pagebuttons").append(
-              `
-              <button value="i" id="pagebtn">${i}</button>
-              `
-            )
-  }
         }
       }
-    )
+      )
+    }
+    
+paginate_buttons = () => {
+  $.ajax
+  (
+    {
+      url: "https://api.themoviedb.org/3/movie/top_rated?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&page=1",
+      type: "GET",
+      success: function (data) 
+      {
+      for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
+        $("#pagebuttons").append(
+          `
+          <button value="${i}" id="pagebtn">${i}</button>
+          `
+          )
+          console.log($("#pagebtn").val())
+        }
+      }
+    }
+  )
 }
 
 setup = function() {
@@ -47,20 +63,38 @@ setup = function() {
     $("aside").empty()
     $("#pagebuttons").empty()
     display_page()
+    paginate_buttons()
   })
 
   $("#pagesizemenu").change(() => {
     // PAGE_SIZE = $("#pagesizemenu").val();
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    
-    console.log("PAGESIZE", PAGE_SIZE)
+    console.log("PAGESIZE", PAGE_SIZE);
+    $("main").empty();
+    $("aside").empty();
+    $("#pagebuttons").empty();
+    display_page();
+    paginate_buttons()
+  })
+
+  $("#prevbtn").click(() => {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    CURRENT_PAGE -= 1
+    $("main").empty()
+    display_page()
+  })
+
+  $("#nextbtn").click(() => {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    CURRENT_PAGE += 1
+    $("main").empty()
+    display_page()
   })
 
   $("body").on("click", "#pagebtn", function () {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE = $("#pagebtn").val();
     $("main").empty()
-    $("aside").empty()
-    $("#pagebuttons").empty()
     display_page()
   })
 
