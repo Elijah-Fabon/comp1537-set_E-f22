@@ -17,9 +17,9 @@ hide_buttons = (yes) => {
 }
 
 display_page = () => {
-  console.log(PAGE_SIZE)
-  console.log(CURRENT_PAGE)
-  console.log($("#searchbar").val())
+  // console.log(PAGE_SIZE)
+  // console.log(CURRENT_PAGE)
+  // console.log($("#searchbar").val())
    $.ajax
     (
       {
@@ -87,13 +87,20 @@ paginate_buttons = () => {
             <button value="${i}" id="${i}">${i}</button>
             `
             )
-            console.log($("#" + i).val())
-            // $("body").on("click", $("#" + i), function () {
-              //   PAGE_SIZE = $("#pagesizemenu option:selected").val();
-              //   CURRENT_PAGE = $("#" + i).val();
-          //   $("main").empty()
-          //   display_page()
-          // })
+            // console.log($("#" + i).val())
+            $("#scripts").append(
+              `
+              <script>
+              $("#" + ${i}).on("click", function () {
+                  PAGE_SIZE = $("#pagesizemenu option:selected").val();
+                  CURRENT_PAGE = $("#" + ${i}).val();
+                  $("main").empty()
+                  display_page()
+              })
+              </script>
+              `
+            ) 
+            // console.log($("#scripts"))
         }
       }
     }
@@ -113,13 +120,14 @@ paginate_buttons = () => {
     
     $("#pagesizemenu").change(() => {
       PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    console.log("PAGESIZE", PAGE_SIZE);
-    $("main").empty();
-    $("aside").empty();
-    $("#pagebuttons").empty();
-    display_page();
-    paginate_buttons()
-  })
+      console.log("PAGESIZE", PAGE_SIZE);
+      $("main").empty();
+      $("aside").empty();
+      $("#pagebuttons").empty();
+      $("#scripts").empty();
+      display_page();
+      paginate_buttons()
+    })
   
   $("#firstbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
