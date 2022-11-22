@@ -48,35 +48,49 @@ display_page = () => {
               )
             }
           }
-          $("#lastbtn").click(() => {
-            PAGE_SIZE = $("#pagesizemenu option:selected").val();
-            CURRENT_PAGE = Math.ceil(data.results.length / (PAGE_SIZE))
-            $("main").empty()
-            display_page()
-          })
+            $("#lastbtn").click(() => {
+              PAGE_SIZE = $("#pagesizemenu option:selected").val();
+              CURRENT_PAGE = Math.ceil(data.results.length / (PAGE_SIZE))
+              $("main").empty()
+              display_page()
+            })
+
+            if (CURRENT_PAGE == 1){
+              $("#prevbtn").prop("disabled", true)
+            }
+            else {
+              $("#prevbtn").prop("disabled", false)
+            }
+
+            if (CURRENT_PAGE == Math.ceil(data.results.length / (PAGE_SIZE))){
+              $("#nextbtn").prop("disabled", true)
+            }
+            else {
+              $("#nextbtn").prop("disabled", false)
+            }
         }
       }
     )
   }
-    
+      
 paginate_buttons = () => {
-  $.ajax
-  (
-    {
+        $.ajax
+        (
+          {
       url: "https://api.themoviedb.org/3/search/movie?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&query="+ $("#searchbar").val() +"&page=1&include_adult=false",
       type: "GET",
       success: function (data) 
       {
-      for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
-        $("#pagebuttons").append(
-          `
-          <button value="${i}" id="${i}">${i}</button>
-          `
-          )
-          console.log($("#" + i).val())
-          // $("body").on("click", $("#" + i), function () {
-          //   PAGE_SIZE = $("#pagesizemenu option:selected").val();
-          //   CURRENT_PAGE = $("#" + i).val();
+        for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
+          $("#pagebuttons").append(
+            `
+            <button value="${i}" id="${i}">${i}</button>
+            `
+            )
+            console.log($("#" + i).val())
+            // $("body").on("click", $("#" + i), function () {
+              //   PAGE_SIZE = $("#pagesizemenu option:selected").val();
+              //   CURRENT_PAGE = $("#" + i).val();
           //   $("main").empty()
           //   display_page()
           // })
@@ -85,20 +99,20 @@ paginate_buttons = () => {
     }
   )
 }
-
-setup = function() {
-  PAGE_SIZE = $("#pagesizemenu option:selected").val();
-  $("#searchbtn").click(() => {
-    $("main").empty()
-    $("aside").empty()
-    $("#pagebuttons").empty()
-    display_page()
-    paginate_buttons()
-    hide_buttons(false)
-  })
-
-  $("#pagesizemenu").change(() => {
+  
+  setup = function() {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    $("#searchbtn").click(() => {
+      $("main").empty()
+      $("aside").empty()
+      $("#pagebuttons").empty()
+      display_page()
+      paginate_buttons()
+      hide_buttons(false)
+    })
+    
+    $("#pagesizemenu").change(() => {
+      PAGE_SIZE = $("#pagesizemenu option:selected").val();
     console.log("PAGESIZE", PAGE_SIZE);
     $("main").empty();
     $("aside").empty();
@@ -106,38 +120,38 @@ setup = function() {
     display_page();
     paginate_buttons()
   })
-
+  
   $("#firstbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE = 1
     $("main").empty()
     display_page()
   })
-
+  
   $("#prevbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE -= 1
     $("main").empty()
     display_page()
   })
-
+  
   $("#nextbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE += 1
     $("main").empty()
     display_page()
   })
-
+  
   $("body").on("click", ".backdropBtn", function (){
     // console.log(`https://image.tmdb.org/t/p/w300/${$(this).attr('movieID')}`)
     $("aside").html(
       `
       <img src="https://image.tmdb.org/t/p/w300/${$(this).attr('movieID')}">
       `
-    )
-  })
-  hide_buttons(true)
-}
-
-
-$(document).ready(setup)
+      )
+    })
+    hide_buttons(true)
+  }
+  
+  
+  $(document).ready(setup)
