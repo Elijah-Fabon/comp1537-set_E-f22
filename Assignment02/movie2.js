@@ -19,10 +19,11 @@ hide_buttons = (yes) => {
 display_page = () => {
   console.log(PAGE_SIZE)
   console.log(CURRENT_PAGE)
+  console.log($("#searchbar").val())
    $.ajax
     (
       {
-        url: "https://api.themoviedb.org/3/movie/top_rated?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&page=1",
+        url: "https://api.themoviedb.org/3/search/movie?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&query="+ $("#searchbar").val() +"&page=1&include_adult=false",
         type: "GET",
         success: function (data) 
         {
@@ -62,7 +63,7 @@ paginate_buttons = () => {
   $.ajax
   (
     {
-      url: "https://api.themoviedb.org/3/movie/top_rated?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&page=1",
+      url: "https://api.themoviedb.org/3/search/movie?api_key=8b35647f9448076a6df7d25f874f6d3b&language=en-US&query="+ $("#searchbar").val() +"&page=1&include_adult=false",
       type: "GET",
       success: function (data) 
       {
