@@ -26,23 +26,26 @@ display_page = () => {
         type: "GET",
         success: function (data) 
         {
-          let start_index = PAGE_SIZE * (CURRENT_PAGE - 1);
-          let end_index = PAGE_SIZE * (CURRENT_PAGE - 1) + PAGE_SIZE;
+          let start_index = parseInt(PAGE_SIZE) * (parseInt(CURRENT_PAGE) - 1);
+          let end_index = start_index + parseInt(PAGE_SIZE);
+          console.log(start_index, end_index)
           for (i = start_index; i < end_index; i++) {
-            $("main").append (
-              `
-              <div>
-                ${data.results[i].title}
-                <p>
-                  ${data.results[i].overview}
-                </p>
-                <img src="https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}"
-                style="width: 100%;">
-                <button movieID="${data.results[i].backdrop_path}" class="backdropBtn"> BackDrop Image </button>
-                <hr>
-              </div>
-              `
-            )
+            if (data.results[i]) {
+              $("main").append (
+                `
+                <div>
+                  ${data.results[i].title}
+                  <p>
+                    ${data.results[i].overview}
+                  </p>
+                  <img src="https://image.tmdb.org/t/p/w500/${data.results[i].poster_path}"
+                  style="width: 100%;">
+                  <button movieID="${data.results[i].backdrop_path}" class="backdropBtn"> BackDrop Image </button>
+                  <hr>
+                </div>
+                `
+              )
+            }
           }
           $("#lastbtn").click(() => {
             PAGE_SIZE = $("#pagesizemenu option:selected").val();
@@ -66,10 +69,16 @@ paginate_buttons = () => {
       for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
         $("#pagebuttons").append(
           `
-          <button value="${i}" id="pagebtn">${i}</button>
+          <button value="${i}" id="${i}">${i}</button>
           `
           )
-          console.log($("#pagebtn").val())
+          console.log($("#" + i).val())
+          // $("body").on("click", $("#" + i), function () {
+          //   PAGE_SIZE = $("#pagesizemenu option:selected").val();
+          //   CURRENT_PAGE = $("#" + i).val();
+          //   $("main").empty()
+          //   display_page()
+          // })
         }
       }
     }
@@ -78,7 +87,6 @@ paginate_buttons = () => {
 
 setup = function() {
   PAGE_SIZE = $("#pagesizemenu option:selected").val();
-
   $("#searchbtn").click(() => {
     $("main").empty()
     $("aside").empty()
@@ -98,6 +106,13 @@ setup = function() {
     paginate_buttons()
   })
 
+  $("#firstbtn").click(() => {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    CURRENT_PAGE = 1
+    $("main").empty()
+    display_page()
+  })
+
   $("#prevbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE -= 1
@@ -108,20 +123,6 @@ setup = function() {
   $("#nextbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE += 1
-    $("main").empty()
-    display_page()
-  })
-
-  $("#firstbtn").click(() => {
-    PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    CURRENT_PAGE = 1
-    $("main").empty()
-    display_page()
-  })
-
-  $("body").on("click", "#pagebtn", function () {
-    PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    CURRENT_PAGE = $("#pagebtn").html();
     $("main").empty()
     display_page()
   })
