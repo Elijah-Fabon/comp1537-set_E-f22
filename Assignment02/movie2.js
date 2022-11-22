@@ -35,6 +35,8 @@ display_page = () => {
               $("main").append (
                 `
                 <div>
+                  ${"#" + (i + 1)}
+                  <br>
                   ${data.results[i].title}
                   <p>
                     ${data.results[i].overview}
