@@ -78,7 +78,7 @@ display_page = () => {
         for(i = 1; i <= Math.ceil(data.results.length / (PAGE_SIZE)); i++) {
           $("#pagebuttons").append(
             `
-            <button value="${i}" id="${i}">${i}</button>
+            <button value="${i}" id="${i}" class="pagebtn">${i}</button>
             `
             )
             // console.log($("#" + i).val())
@@ -90,8 +90,6 @@ display_page = () => {
                   CURRENT_PAGE = $("#" + ${i}).val();
                   $("main").empty()
                   display_page()
-                  $("#prevbtn").show()
-                  $("#nextbtn").show()
                 })
                 </script>
               `
@@ -132,13 +130,6 @@ setup = function() {
     display_page()
   })
   
-  $("#lastbtn").click(() => {
-    PAGE_SIZE = $("#pagesizemenu option:selected").val();
-    CURRENT_PAGE = Math.ceil(20 / (PAGE_SIZE))
-    $("main").empty()
-    display_page()
-  })
-
   $("#prevbtn").click(() => {
     PAGE_SIZE = $("#pagesizemenu option:selected").val();
     CURRENT_PAGE -= 1
@@ -151,6 +142,18 @@ setup = function() {
     CURRENT_PAGE += 1
     $("main").empty()
     display_page()
+  })
+  
+  $("#lastbtn").click(() => {
+    PAGE_SIZE = $("#pagesizemenu option:selected").val();
+    CURRENT_PAGE = Math.ceil(20 / (PAGE_SIZE))
+    $("main").empty()
+    display_page()
+  })
+
+  $("body").on("click", ".pagebtn", function (){
+    $("#prevbtn").show()
+    $("#nextbtn").show()
   })
   
   $("body").on("click", ".backdropBtn", function (){
