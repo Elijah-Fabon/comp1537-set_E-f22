@@ -1,0 +1,23 @@
+{
+  "name": "comp1537-set_e-f22",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Elijah-Fabon/comp1537-set_E-f22.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Elijah-Fabon/comp1537-set_E-f22/issues"
+  },
+  "homepage": "https://github.com/Elijah-Fabon/comp1537-set_E-f22#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.7.4"
+  }
+}
