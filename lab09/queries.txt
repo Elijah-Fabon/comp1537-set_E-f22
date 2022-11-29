@@ -1,0 +1,52 @@
+(Q1) Find the male unicorns weigh more than 700 pounds
+db.unicorns.find(
+  {gender: "m", weight: {$gt: 700}},
+)
+
+(Q2) Find the unicorns that have no vampire field
+db.unicorns.find(
+  {vampires: {$exists: false}}
+)
+
+(Q3) Find the unicorns that like apples or carrots
+db.unicorns.find(
+  {$or: [{loves: "apple"}, {loves: "carrot"}]}
+)
+
+(Q4) Find the female unicorns that either love apples or weigh less than 500 pounds
+db.unicorns.find(
+  {gender: "f", $or: [{loves: "apple"}, {weight: {$lt: 500}}]}
+)
+
+(Q5) Decrease unicorn Pilot’s number of vampires by 2
+db.unicorns.update(
+  {name: "Pilot"},
+  {$inc: {vampires: -2}},
+  {multi: true}
+)
+
+(Q6) Add “sugar” to the list of food  unicorn Aurora loves to eat
+db.unicorns.update(
+  {name: "Aurora"},
+  {$push: {loves: "sugar"}},
+  {multi: true},
+)
+
+(Q7) Give all of the unicorns vaccine  (set vaccinated to be true)
+db.unicorns.update(
+  {},
+  {$set: {vaccinated: true}},
+  {multi: true}
+)
+
+(Q8) Sort the unicorns based on weights decreasingly
+db.unicorns.find().sort({weight: -1})
+
+(Q9) Sort the unicorns based on the names increasingly, then the number of vampires decreasingly
+db.unicorns.find().sort({name: 1}, {vampires: -1})
+
+(Q10) Get the second and third heaviest unicorns
+db.unicorns.find().sort({weight: -1}).limit(2).skip(1)
+
+(Q11) Count the number of unicorns who have more than 50 vampires
+db.unicorns.find({vampires: {$gt: 50}}).count()
