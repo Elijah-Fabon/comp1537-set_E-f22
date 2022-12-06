@@ -48,7 +48,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyweightUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ weight: {$gt: req.body.lowerBound}, weight: {$lt: req.body.upperBound} }, (err, data) => {
+  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
