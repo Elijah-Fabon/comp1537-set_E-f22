@@ -11,7 +11,23 @@ function setup (){
         success: function (data) {
           console.log(data);
           receivedArr = data;
-          $("#result").html(JSON.stringify(data))
+          result = "";
+          result += "<table>"
+          data.map((unicorn) => {
+            if (unicorn["vaccinated"] == true)
+              result += `<tr class="highlight">`
+            else
+              result += `<tr>`
+            for (var field in unicorn) {
+              result += `<td>${unicorn[field]}</td>`
+            }
+            result += `</tr>`
+            })
+          result += "</table>"
+
+
+          // $("#result").html(JSON.stringify(data))
+          $("#result").html(result)
         }
       })
     }
@@ -24,7 +40,10 @@ function setup (){
       console.log(newArr);
       $("#result").html(JSON.stringify(newArr[0]))
     }else{
-      alert("unchecked");
+      newArr = receivedArr.map((item) => {
+        return item;
+      })
+      $("#result").html(JSON.stringify(newArr[0]))
     }
   });
 }
