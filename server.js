@@ -44,5 +44,25 @@ app.post('/filteredUnicorns', (req, res) => {
   });
 });
 
+app.use(express.urlencoded());
+app.use(express.json());
+app.post('/filteredbyweightUnicorns', (req, res) => {
+  console.log(req.body)
+  unicornModel.find({ weight: {$gt: req.body.lowerBound}, weight: {$lt: req.body.upperBound} }, (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
+app.use(express.urlencoded());
+app.use(express.json());
+app.post('/filteredbyfoodUnicorns', (req, res) => {
+  console.log(req.body)
+  unicornModel.find({ $or: [req.body.favouritefood] }, (err, data) => {
+    if (err) res.send(err);
+    res.send(data);
+  });
+});
+
 
 app.use(express.static('./public'));
