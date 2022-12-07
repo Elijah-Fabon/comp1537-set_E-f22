@@ -38,7 +38,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ name: req.body.unicornNameFromHTTPbody }, (err, data) => {
+  unicornModel.find({ name: req.body.unicornNameFromHTTPbody }, {name: 1, _id: 0}, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
@@ -48,7 +48,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyweightUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, (err, data) => {
+  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, req.body.filter, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
@@ -58,10 +58,17 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyfoodUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, (err, data) => {
-    if (err) res.send(err);
-    res.send(data);
-  });
+  if (req.body.apple == "apple" && req.body.carrot == "carrot") {
+    unicornModel.find({ $and: [{loves: req.body.apple}, {loves: req.body.carrot}] }, req.body.filter, (err, data) => {
+      if (err) res.send(err);
+      res.send(data);
+    });
+  } else {
+    unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, req.body.filter, (err, data) => {
+      if (err) res.send(err);
+      res.send(data);
+    });
+  }
 });
 
 

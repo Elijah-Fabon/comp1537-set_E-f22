@@ -6,7 +6,10 @@ function setup (){
         url: "http://localhost:5000/filteredUnicorns",
         type: "POST",
         data: {
-          unicornNameFromHTTPbody: $("#unicornName").val()
+          unicornNameFromHTTPbody: $("#unicornName").val(),
+          filter: ($('#nameFilter').is(":checked")) ? {name: 1, _id: 0} : 
+          ($('#weightFilter').is(":checked")) ? {weight: 1, _id: 0} : 
+          ($('#nameFilter').is(":checked")) && ($('#weightFilter').is(":checked")) ? {name: 1, weight: 1, _id: 0} : {}
         },
         success: function (data) {
           console.log(data);
