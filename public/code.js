@@ -65,18 +65,53 @@ function setup (){
       })
     }
   )
+
+  $("#unicornFoodbtn").click(
+    function () {
+      $.ajax({
+        url: "http://localhost:5000/filteredbyfoodUnicorns",
+        type: "POST",
+        data: {
+          apple: ($('#appleFilter').is(":checked")) ? "apple" : "none",
+          carrot: ($('#carrotFilter').is(":checked")) ? "carrot" : "none"
+        },
+        success: function (data) {
+          console.log(data);
+          receivedArr = data;
+          result = "";
+          result += "<table>"
+          data.map((unicorn) => {
+            if (unicorn["vaccinated"] == true)
+              result += `<tr class="highlight">`
+            else
+              result += `<tr>`
+            for (var field in unicorn) {
+              result += `<td>${unicorn[field]}</td>`
+            }
+            result += `</tr>`
+            })
+          result += "</table>"
+
+
+          // $("#result").html(JSON.stringify(data))
+          $("#result").html(result)
+        }
+      })
+    }
+  )
   $("#nameFilter").change(function () {
     if (this.checked) {
       newArr = receivedArr.map((item) => {
         return item.name;
       })
       console.log(newArr);
-      $("#result").html(JSON.stringify(newArr[0]))
+      $("#result").html(newArr[0])
     }else{
       newArr = receivedArr.map((item) => {
         return item;
       })
-      $("#result").html(JSON.stringify(newArr[0]))
+      console.log(newArr);
+      $("#result").html(newArr[0])
     }
   });
 }

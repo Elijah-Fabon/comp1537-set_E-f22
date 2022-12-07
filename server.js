@@ -58,7 +58,7 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyfoodUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ $or: [req.body.favouritefood] }, (err, data) => {
+  unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
