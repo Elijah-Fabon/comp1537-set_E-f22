@@ -7,9 +7,8 @@ function setup (){
         type: "POST",
         data: {
           unicornNameFromHTTPbody: $("#unicornName").val(),
-          filter: ($('#nameFilter').is(":checked")) ? {name: 1, _id: 0} : 
-          ($('#weightFilter').is(":checked")) ? {weight: 1, _id: 0} : 
-          ($('#nameFilter').is(":checked")) && ($('#weightFilter').is(":checked")) ? {name: 1, weight: 1, _id: 0} : {}
+          namefilter: ($('#nameFilter').is(":checked")) ? "true" : "false",
+          weightfilter: ($('#weightFilter').is(":checked")) ? "true" : "false"
         },
         success: function (data) {
           console.log(data);
@@ -42,7 +41,9 @@ function setup (){
         type: "POST",
         data: {
           lowerBound: $("#lowerLimit").val(),
-          upperBound: $("#upperLimit").val()
+          upperBound: $("#upperLimit").val(),
+          namefilter: ($('#nameFilter').is(":checked")) ? "true" : "false",
+          weightfilter: ($('#weightFilter').is(":checked")) ? "true" : "false"
         },
         success: function (data) {
           console.log(data);
@@ -76,7 +77,9 @@ function setup (){
         type: "POST",
         data: {
           apple: ($('#appleFilter').is(":checked")) ? "apple" : "none",
-          carrot: ($('#carrotFilter').is(":checked")) ? "carrot" : "none"
+          carrot: ($('#carrotFilter').is(":checked")) ? "carrot" : "none",
+          namefilter: ($('#nameFilter').is(":checked")) ? "true" : "false",
+          weightfilter: ($('#weightFilter').is(":checked")) ? "true" : "false"
         },
         success: function (data) {
           console.log(data);
@@ -102,21 +105,6 @@ function setup (){
       })
     }
   )
-  $("#nameFilter").change(function () {
-    if (this.checked) {
-      newArr = receivedArr.map((item) => {
-        return item.name;
-      })
-      console.log(newArr);
-      $("#result").html(newArr[0])
-    }else{
-      newArr = receivedArr.map((item) => {
-        return item;
-      })
-      console.log(newArr);
-      $("#result").html(newArr[0])
-    }
-  });
 }
 
 

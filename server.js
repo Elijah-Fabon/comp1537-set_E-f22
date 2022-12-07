@@ -38,7 +38,11 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ name: req.body.unicornNameFromHTTPbody }, {name: 1, _id: 0}, (err, data) => {
+  if (req.body.namefilter == "true" && req.body.weightfilter == "true"){projection = {name: 1, weight: 1, _id: 0}}
+  else if (req.body.weightfilter == "true"){projection = {weight: 1, _id: 0}}
+  else if (req.body.namefilter == "true"){projection = {name: 1, _id: 0}}
+  else {projection = {}}
+  unicornModel.find({ name: req.body.unicornNameFromHTTPbody }, projection, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
@@ -48,7 +52,11 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyweightUnicorns', (req, res) => {
   console.log(req.body)
-  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, req.body.filter, (err, data) => {
+  if (req.body.namefilter == "true" && req.body.weightfilter == "true"){projection = {name: 1, weight: 1, _id: 0}}
+  else if (req.body.weightfilter == "true"){projection = {weight: 1, _id: 0}}
+  else if (req.body.namefilter == "true"){projection = {name: 1, _id: 0}}
+  else {projection = {}}
+  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, projection, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
@@ -58,13 +66,17 @@ app.use(express.urlencoded());
 app.use(express.json());
 app.post('/filteredbyfoodUnicorns', (req, res) => {
   console.log(req.body)
+  if (req.body.namefilter == "true" && req.body.weightfilter == "true"){projection = {name: 1, weight: 1, _id: 0}}
+  else if (req.body.weightfilter == "true"){projection = {weight: 1, _id: 0}}
+  else if (req.body.namefilter == "true"){projection = {name: 1, _id: 0}}
+  else {projection = {}}
   if (req.body.apple == "apple" && req.body.carrot == "carrot") {
-    unicornModel.find({ $and: [{loves: req.body.apple}, {loves: req.body.carrot}] }, req.body.filter, (err, data) => {
+    unicornModel.find({ $and: [{loves: req.body.apple}, {loves: req.body.carrot}] }, projection, (err, data) => {
       if (err) res.send(err);
       res.send(data);
     });
   } else {
-    unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, req.body.filter, (err, data) => {
+    unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, projection, (err, data) => {
       if (err) res.send(err);
       res.send(data);
     });
