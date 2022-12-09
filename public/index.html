@@ -7,6 +7,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="../server.js"></script>
   <script src="./code.js"></script>
 </head>
 
@@ -32,6 +33,14 @@
   <input type="checkbox" id="carrotFilter">
   <label for="carrotFilter">Carrot</label>
   <button id="unicornFoodbtn">Search</button>
+  <hr>
+  <h2>Or, Search for Unicorn by Gender</h2>
+  <label for="genders">Unicorn Genders</label>
+  <select id="genderfilter" name="genders">
+    <option value="female">Female</option>
+    <option value="male">Male</option>
+  </select>
+  <button id="unicornGenderbtn">Search</button>
   <hr>
   <h2>Filters/Projection</h2>
   <input type="checkbox" id="nameFilter" class="projection">

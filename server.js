@@ -56,7 +56,7 @@ app.post('/filteredbyweightUnicorns', (req, res) => {
   else if (req.body.weightfilter == "true"){projection = {weight: 1, _id: 0}}
   else if (req.body.namefilter == "true"){projection = {name: 1, _id: 0}}
   else {projection = {}}
-  unicornModel.find({ weight: {$gte: req.body.lowerBound}, weight: {$lte: req.body.upperBound} }, projection, (err, data) => {
+  unicornModel.find({ weight: {$gte: req.body.lowerBound, $lte: req.body.upperBound} }, projection, (err, data) => {
     if (err) res.send(err);
     res.send(data);
   });
@@ -77,6 +77,27 @@ app.post('/filteredbyfoodUnicorns', (req, res) => {
     });
   } else {
     unicornModel.find({ $or: [{loves: req.body.apple}, {loves: req.body.carrot}] }, projection, (err, data) => {
+      if (err) res.send(err);
+      res.send(data);
+    });
+  }
+});
+
+app.use(express.urlencoded());
+app.use(express.json());
+app.post('/filteredbygenderUnicorns', (req, res) => {
+  console.log(req.body)
+  if (req.body.namefilter == "true" && req.body.weightfilter == "true"){projection = {name: 1, weight: 1, _id: 0}}
+  else if (req.body.weightfilter == "true"){projection = {weight: 1, _id: 0}}
+  else if (req.body.namefilter == "true"){projection = {name: 1, _id: 0}}
+  else {projection = {_id: 0}}
+  if (req.body.gender == "male") {
+    unicornModel.find({ gender: "m" }, projection, (err, data) => {
+      if (err) res.send(err);
+      res.send(data);
+    });
+  } else {
+    unicornModel.find({ gender: "f" }, projection, (err, data) => {
       if (err) res.send(err);
       res.send(data);
     });

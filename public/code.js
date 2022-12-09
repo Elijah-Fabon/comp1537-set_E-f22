@@ -1,4 +1,15 @@
 receivedArr = []
+function showdetails (unicornName) {
+  console.log(unicornName)
+  elementid = unicornName.id
+  var x = document.getElementById(elementid);
+  console.log(x)
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 function setup (){
   $("#unicornNamebtn").click(
     function () {
@@ -97,6 +108,49 @@ function setup (){
             result += `</tr>`
             })
           result += "</table>"
+
+
+          // $("#result").html(JSON.stringify(data))
+          $("#result").html(result)
+        }
+      })
+    }
+  )
+  $("#unicornGenderbtn").click(
+    function () {
+      $.ajax({
+        url: "http://localhost:5000/filteredbygenderUnicorns",
+        type: "POST",
+        data: {
+          gender: $("#genderfilter").val() ,
+          namefilter: ($('#nameFilter').is(":checked")) ? "true" : "false",
+          weightfilter: ($('#weightFilter').is(":checked")) ? "true" : "false"
+        },
+        success: function (data) {
+          console.log(data);
+          receivedArr = data;
+          result = "";
+          result += "<ul>"
+          data.map((unicorn) => {
+              result += `<li>${unicorn["name"]}</li>`
+              result += `<button id="${unicorn["name"]}btn" onclick="showdetails(${unicorn["name"]}details)">Show details</button>`
+              result += `<ul id="${unicorn["name"]}details" style="display:none;">`
+              result += `<li>dob: ${unicorn["dob"]}</li>`
+              result += `<li>loves:</li>`
+              result += `<ul>`
+              for (var food in unicorn["loves"]){
+                result += `<li>${unicorn["loves"][food]}</li>`
+              }
+              result += `</ul>`
+              result += `<li>weight: ${unicorn["weight"]}</li>`
+              if (unicorn["gender"] == "f"){result += `<li>gender: female</li>`}
+              else {result += `<li>gender: male</li>`}
+              if (unicorn["vampires"] != null){
+                result += `<li>vampires: ${unicorn["vampires"]}</li>`
+              }
+              result += `</ul>`
+            })
+          result += "</ul>"
 
 
           // $("#result").html(JSON.stringify(data))
