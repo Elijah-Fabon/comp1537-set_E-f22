@@ -1,13 +1,17 @@
 receivedArr = []
-function showdetails (unicornName) {
-  console.log(unicornName)
+function showdetails (unicornName, detailbutton) {
+  console.log(detailbutton)
   elementid = unicornName.id
+  buttonid = detailbutton.id
   var x = document.getElementById(elementid);
+  var y = document.getElementById(buttonid);
   console.log(x)
   if (x.style.display === "none") {
     x.style.display = "block";
+    $(y).html("Hide Details")
   } else {
     x.style.display = "none";
+    $(y).html("Show Details")
   }
 }
 function setup (){
@@ -133,7 +137,7 @@ function setup (){
           result += "<ul>"
           data.map((unicorn) => {
               result += `<li>${unicorn["name"]}</li>`
-              result += `<button id="${unicorn["name"]}btn" onclick="showdetails(${unicorn["name"]}details)">Show details</button>`
+              result += `<button id="${unicorn["name"]}btn" onclick="showdetails(${unicorn["name"]}details, ${unicorn["name"]}btn)">Show details</button>`
               result += `<ul id="${unicorn["name"]}details" style="display:none;">`
               result += `<li>dob: ${unicorn["dob"]}</li>`
               result += `<li>loves:</li>`
